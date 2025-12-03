@@ -1,0 +1,99 @@
+messages:
+  bot:
+    namings:
+      ludobot:
+        values:
+          en: "Ludobot"
+          ru: "Лудобот"
+      roulette:
+        values:
+          en: "European roulette"
+          ru: "Европейская рулетка"
+  
+  handlers:
+    roulette:
+      invalid_bet:
+        description: "Неверная ставка (не целое число, не больше 0 и т.д.)"
+        values:
+          en: "Invalid bet: bet must be a number greater than zero"
+          ru: "Неверная ставка: ставка должна быть числом больше нуля"
+      invalid_sector:
+        description: "Неверный сектор ставки"
+        values:
+          en: "Invalid sector: type /help to get a list of available bet sectors"
+          ru: "Неверный сектор: введите /help, чтобы получить список доступных секторов для ставки"
+      help_bot_command:
+        description: Информация об игре в рулетку
+        values:
+          en: "To play roulette type /roulette <bet> <sector> command"
+          ru: "Чтобы сыграть в рулетку введите команду /roulette <ставка> <сектор>"
+      bet_zero:
+        values:
+          en: "Bet on zero"
+          ru: "Ставка на зеро"
+      bet_red:
+        values:
+          en: "Bet on red"
+          ru: "Ставка на красное"
+      bet_black:
+        values:
+          en: "Bet on black"
+          ru: "Ставка на черное"
+      bet_first_twelve:
+        values:
+          en: "Bet on first twelve numbers"
+          ru: "Ставка на первые двенадцать чисел"
+      bet_second_twelve:
+        values:
+          en: "Bet on second twelve numbers"
+          ru: "Ставка на вторые двенадцать чисел"
+      bet_third_twelve:
+        values:
+          en: "Bet on third twelve numbers"
+          ru: "Ставка на вторые двенадцать чисел"
+      bet_first_eighteen:
+        values:
+          en: "Bet on first eighteen numbers"
+          ru: "Ставка на первые восемнадцать чисел"
+      bet_second_eighteen:
+        values:
+          en: "Bet on second eighteen numbers"
+          ru: "Ставка на вторые восемнадцать чисел"
+      zero:
+        values:
+          en:
+            "zero"
+          ru:
+            "зеро"
+      red:
+        values:
+          en: "red"
+          ru: "красное"
+      black:
+        values:
+          en: "black"
+          ru: "черное"
+      first_twelve:
+        values:
+          en: "first twelve"
+          ru: "первые двенадцать"
+      second_twelve:
+        values:
+          en: "second twelve"
+          ru: "вторые двенадцать"
+      third_twelve:
+        values:
+          en: "third twelve"
+          ru: "третьи двенадцать"
+      first_eighteen:
+        values:
+          en: "first eighteen"
+          ru: "первые восемнадцать"
+      second_eighteen:
+        values:
+          en: "second eighteen"
+          ru: "вторые восемнадцать"
+      help:
+        values:
+          en: "A usual european roulette"
+          ru: "Обычная европейская рулетка"
