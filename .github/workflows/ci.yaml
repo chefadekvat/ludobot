@@ -12,7 +12,7 @@ permissions:
 
 jobs: 
   go-bot-build:
-    name: Backend Build
+    name: Bot Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
