@@ -1,0 +1,15 @@
+networks:
+  bot-network:
+    driver: bridge
+
+services:
+  ludobot:
+    build:
+      context: ./services/ludobot
+      dockerfile: Dockerfile
+    container_name: ludobot
+    networks:
+      - bot-network
+    restart: unless-stopped
+
+    
