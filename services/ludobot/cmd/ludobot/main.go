@@ -5,9 +5,9 @@ import (
 	"errors"
 	"fmt"
 	"log/slog"
-	"ludobot/internal/arguments"
 	"ludobot/internal/di"
 	"ludobot/internal/handlers"
+	"ludobot/internal/infrastructure/arguments"
 	"os"
 	"os/signal"
 

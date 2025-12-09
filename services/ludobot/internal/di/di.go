@@ -2,7 +2,7 @@ package di
 
 import (
 	"context"
-	"ludobot/internal/arguments"
+	"ludobot/internal/infrastructure/arguments"
 )
 
 type Dependencies struct {
