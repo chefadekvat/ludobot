@@ -3,6 +3,17 @@ networks:
     driver: bridge
 
 services:
+  postgres:
+    build:
+      context: ./services/postgres
+      dockerfile: Dockerfile
+    env_file:
+      - ./services/postgres/env/postgres.env
+    container_name: postgres
+    networks:
+      - bot-network
+    restart: unless-stopped
+
   ludobot:
     build:
       context: ./services/ludobot
@@ -11,5 +22,3 @@ services:
     networks:
       - bot-network
     restart: unless-stopped
-
-    
