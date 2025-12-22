@@ -1,0 +1,33 @@
+name: user-traits-ci
+
+on:
+  pull_request:
+    paths:
+      - 'services/user-traits/**'
+      - '.github/workflows/user-traits-ci.yaml'
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs: 
+  build:
+    name: Build service
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Golang
+        uses: actions/setup-go@v5
+        with:
+          go-version: "stable"
+        
+      - name: Build
+        run: |
+          cd services/user-traits
+          make user-traits
+
+      - name: Test
+        run: |
+          cd services/user-traits
+          make test

@@ -1,0 +1,55 @@
+openapi: "3.0"
+info:
+  title: user-traits
+  description: |
+    A service for interaction with users (changing tokens balance, etc.)
+
+paths:
+  /v1/user/create:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/V1UserCreateRequest'
+      responses:
+        204:
+          description: Success
+        409:
+          description: User already created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorWithMessage'
+
+components:
+  schemas:
+    V1UserCreateRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - balance
+      properties:
+        id:
+          type: integer
+          x-go-type: int64
+          description: Id пользователя
+        balance:
+          type: integer
+          description: Изначальный баланс пользователя
+    
+    ErrorWithMessage:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          description: Код ошибки
+          example: Internal error
+        message:
+          type: string
+          description: Пояснительное сообщение об ошибке
