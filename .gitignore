@@ -33,4 +33,4 @@ go.work.sum
 .vscode/
 
 # Generated files directories
-sql/
+gen/

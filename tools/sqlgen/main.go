@@ -129,8 +129,14 @@ const (
 func main() {
 	fmt.Println("Generating SQL constants package...")
 
-	sqlDir := "./sql"
-	outputDir := "./internal/sql"
+	args := os.Args
+	if len(args) < 3 {
+		fmt.Println("Specify input and output path for sqlgen line this:")
+		fmt.Println("./sqlgen <input-path> <output-path>")
+	}
+
+	sqlDir := args[1]
+	outputDir := args[2]
 	outputFile := filepath.Join(outputDir, "sql.go")
 
 	sqlFiles, err := readSQLFiles(sqlDir)

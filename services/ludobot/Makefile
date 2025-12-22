@@ -1,13 +1,13 @@
 .PHONY: bot
 
 bot: mod sql
-	@go build -o build/ludobot cmd/ludobot/main.go
+	@go build -o build/ludobot cmd/main.go
 
 mod:
 	@go mod download
 
 sql:
-	@go run cmd/sqlgen/main.go
+	@go run ../../tools/sqlgen/main.go ./sql ./gen/sql
 
 test:
 	@go test -v ./...
