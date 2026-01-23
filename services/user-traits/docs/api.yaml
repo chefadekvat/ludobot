@@ -5,6 +5,17 @@ info:
     A service for interaction with users (changing tokens balance, etc.)
 
 paths:
+  /ping:
+    get:
+      requestBody:
+        required: false
+      responses:
+        200:
+          content:
+            text/plain:
+              schema:
+                type: string
+
   /v1/user/create:
     post:
       requestBody:
@@ -18,6 +29,12 @@ paths:
           description: Success
         409:
           description: User already created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorWithMessage'
+        500:
+          description: Internal server error
           content:
             application/json:
               schema:

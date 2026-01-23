@@ -4,20 +4,48 @@ networks:
 
 services:
   postgres:
-    build:
-      context: ./services/postgres
-      dockerfile: Dockerfile
-    env_file:
-      - ./services/postgres/env/postgres.env
+    image: postgres:latest
     container_name: postgres
+    env_file:
+      - ${ENV_ROOT}/.env
     networks:
       - bot-network
+    expose:
+      - "5432"
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  
+  user-traits:
+    build:
+      context: ${PROJECT_ROOT}
+      args:
+        USER_TRAITS_ROOT: services/user-traits
+        SQLGEN_ROOT: tools/sqlgen
+      dockerfile: ${USER_TRAITS_ROOT}/Dockerfile
+    container_name: user-traits
+    env_file:
+      - ${ENV_ROOT}/.env
+    networks:
+      - bot-network
+    expose:
+      - "8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    command: |
+      ./user-traits --port=8080 --postgresql=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/user_traits
 
   ludobot:
     build:
-      context: ./services/ludobot
-      dockerfile: Dockerfile
+      context: ${PROJECT_ROOT}
+      dockerfile: ${LUDOBOT_ROOT}/Dockerfile
+      args:
+        LUDOBOT_ROOT: services/ludobot
     container_name: ludobot
     networks:
       - bot-network

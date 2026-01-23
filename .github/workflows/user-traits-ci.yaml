@@ -17,6 +17,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set up environment variables
+        run: |
+          source ./setup.sh
+          echo "PROJECT_ROOT=$PROJECT_ROOT" >> $GITHUB_ENV
+          echo "SQLGEN_ROOT=$SQLGEN_ROOT" >> $GITHUB_ENV
+          echo "USER_TRAITS_ROOT=$USER_TRAITS_ROOT" >> $GITHUB_ENV
+
       - name: Set up Golang
         uses: actions/setup-go@v5
         with:
@@ -31,3 +38,8 @@ jobs:
         run: |
           cd services/user-traits
           make test
+      
+      - name: Testsuite
+        run: |
+          cd services/user-traits
+          make testsuite
