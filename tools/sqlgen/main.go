@@ -133,6 +133,7 @@ func main() {
 	if len(args) < 3 {
 		fmt.Println("Specify input and output path for sqlgen line this:")
 		fmt.Println("./sqlgen <input-path> <output-path>")
+		os.Exit(1)
 	}
 
 	sqlDir := args[1]
