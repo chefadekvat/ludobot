@@ -1,0 +1,49 @@
+name: games-calculator
+
+on:
+  pull_request:
+    paths:
+      - 'services/games-calculator/**'
+      - '.github/workflows/games-calculator-ci.yaml'
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs: 
+  build:
+    name: Build service
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up environment variables
+        run: |
+          source ./setup.sh
+          echo "PROJECT_ROOT=$PROJECT_ROOT" >> $GITHUB_ENV
+          echo "GAMES_CALCULATOR_ROOT=$GAMES_CALCULATOR_ROOT" >> $GITHUB_ENV
+
+      - name: Set up Golang
+        uses: actions/setup-go@v5
+        with:
+          go-version: "stable"
+        
+      - name: Build
+        run: |
+          cd services/games-calculator
+          make games-calculator
+
+      - name: Test
+        run: |
+          cd services/games-calculator
+          make test
+      
+      - name: Build testsuite
+        run: |
+          cd services/games-calculator
+          make build-testsuite
+      
+      - name: Testsuite
+        run: |
+          cd services/games-calculator
+          make testsuite
