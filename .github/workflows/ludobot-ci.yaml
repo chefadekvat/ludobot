@@ -1,10 +1,10 @@
 name: ci
 
 on:
-  push:
-    branches: ["main"]
   pull_request:
-    branches: ["main"]
+    paths:
+      - 'services/ludobot/**'
+      - '.github/workflows/ludobot-ci.yaml'
 
 permissions:
   contents: read
