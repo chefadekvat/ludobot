@@ -1,0 +1,138 @@
+openapi: "3.0"
+info:
+  title: games-calculator
+  description: |
+    A service for managing games
+
+paths:
+  /ping:
+    get:
+      requestBody:
+        required: false
+      responses:
+        200:
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /v1/games/bandit/spin:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/V1BanditSpinRequest"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/V1BanditSpinResponse"
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorWithMessage"
+
+components:
+  schemas:
+    V1BanditSpinRequest:
+      type: object
+      required:
+        - symbols
+        - combinations
+      properties:
+        symbols:
+          type: array
+          items:
+            $ref: "#/components/schemas/V1BanditSymbol"
+        combinations:
+          type: array
+          items:
+            $ref: "#/components/schemas/V1BanditCombination"
+
+    V1BanditSpinResponse:
+      type: object
+      required:
+        - field
+        - matches
+        - multiplier
+      properties:
+        field:
+          type: array
+          items:
+            type: array
+            items:
+              type: integer
+        matches:
+          type: array
+          items:
+    
+    V1CombinationAndCount:
+      type: object
+      required:
+        - combination
+        - count
+      properties:
+        combination:
+          $ref: "#/components/schemas/V1BanditCombination"
+        count:
+          type: integer
+
+    V1BanditSymbol:
+      type: object
+      required:
+        - id
+        - multiplier
+      properties:
+        id:
+          type: integer
+        multiplier:
+          type: integer
+        symbol:
+          description: any unicode symbol, if provided, response will contain result string
+          type: string
+          minLength: 1
+          maxLength: 1
+
+    V1BanditCombination:
+      type: object
+      required:
+        - type
+        - multiplier
+      properties:
+        type:
+          $ref: "#/components/schemas/BanditCombinationType"
+        multiplier:
+          type: integer
+
+    BanditCombinationType:
+      type: string
+      enum:
+        - bandit_combination_horizontal_small
+        - bandit_combination_vertical
+        - bandit_combination_diagonal_left
+        - bandit_combination_diagonal_right
+        - bandit_combination_horizontal_medium
+        - bandit_combination_horizontal_large
+        - bandit_combination_up
+        - bandit_combination_down
+        - bandit_combination_sky
+        - bandit_combination_ground
+        - bandit_combination_eye
+        - bandit_combination_jackpot
+
+    ErrorWithMessage:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+        message:
+          type: string
