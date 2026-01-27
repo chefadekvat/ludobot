@@ -1,4 +1,4 @@
-name: ci
+name: ludobot-ci
 
 on:
   pull_request:
