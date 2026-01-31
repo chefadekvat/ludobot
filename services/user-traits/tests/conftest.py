@@ -53,6 +53,6 @@ def user_traits_root():
 def pgsql_local(user_traits_root, pgsql_local_create):
     databases = discover.find_schemas(
         'user_traits',
-        [user_traits_root.joinpath('testsuite/schemas/')],
+        [user_traits_root.joinpath('tests/schemas/')],
     )
     return pgsql_local_create(list(databases.values()))

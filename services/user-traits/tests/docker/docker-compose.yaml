@@ -20,7 +20,7 @@ services:
       args:
         USER_TRAITS_ROOT: services/user-traits
         SQLGEN_ROOT: tools/sqlgen
-      dockerfile: ${USER_TRAITS_ROOT}/testsuite/docker/testsuite/Dockerfile
+      dockerfile: ${USER_TRAITS_ROOT}/tests/docker/testsuite/Dockerfile
     depends_on:
       postgresql-test:
         condition: service_healthy
@@ -29,6 +29,6 @@ services:
       - PATH=/opt/yandex/testsuite/bin:/bin:/usr/bin
       - USER_TRAITS_ROOT=/testsuite/user-traits
       - PYTEST_ADDOPTS="--postgresql=postgresql://testsuite:testsuite@postgresql-test:5432/"
-    working_dir: /testsuite/user-traits/testsuite
+    working_dir: /testsuite/user-traits/tests
     volumes:
       - ${USER_TRAITS_ROOT}:/testsuite/user-traits
