@@ -39,6 +39,11 @@ jobs:
           cd services/user-traits
           make test
       
+      - name: Build Testsuite
+        run: |
+          cd services/user-traits
+          make testsuite-build
+      
       - name: Testsuite
         run: |
           cd services/user-traits

@@ -1,8 +1,11 @@
 .PHONY: user-traits
 
-testsuite: user-traits
-	docker compose -f testsuite/docker/docker-compose.yaml build
-	docker compose -f testsuite/docker/docker-compose.yaml run testsuite pytest
+testsuite-build:
+	docker compose -f tests/docker/docker-compose.yaml build
+	docker compose -f tests/docker/docker-compose.yaml pull
+
+testsuite:
+	docker compose -f tests/docker/docker-compose.yaml run testsuite pytest
 
 user-traits: codegen
 	go build -o ./build/user-traits cmd/main.go
